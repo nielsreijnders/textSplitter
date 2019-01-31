@@ -1,11 +1,11 @@
-# textSplitter 🔪
+# textSplitter  📖
 
 [![npm version](https://img.shields.io/npm/v/textsplitter.svg?style=for-the-badge&colorB=%23000)](https://www.npmjs.com/package/textsplitter)
 [![license](https://img.shields.io/npm/l/textsplitter.svg?style=for-the-badge&colorB=%23000)](https://github.com/nielsreijnders/textsplitter/blob/master/LICENSE)
 [![dependencies](https://img.shields.io/badge/dependencies-none-ff69b4.svg?style=for-the-badge&colorB=%23000)](https://github.com)
 [![gzip size](https://img.shields.io/bundlephobia/minzip/textsplitter.svg?colorB=black&style=for-the-badge)](https://unpkg.com/textsplitter)
 
- Tiny library to wrap lines after every "line break" in a paragraph. 
+Tiny library to split each characters / words / lines 
 
 ##### Install
 
