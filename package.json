@@ -1,0 +1,25 @@
+{
+    "name": "textsplitter",
+    "version": "1.0.0",
+    "description": "wraps each line in a paragraph in an element",
+    "license": "MIT",
+    "repository": "nielsreijnders/textsplitter",
+    "main": "dist/textsplitter.mjs",
+    "unpkg": "dist/textsplitter.umd.js",
+    "keywords": [
+        "tiny",
+        "npm",
+        "package",
+        "textsplitter"
+    ],
+    "devDependencies": {
+        "microbundle": "^0.9.0"
+    },
+    "scripts": {
+        "build": "microbundle --name textsplitter --format es,umd --sourcemap false",
+        "prepare": "$npm_execpath run build"
+    },
+    "files": [
+        "dist"
+    ]
+}
