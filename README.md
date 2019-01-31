@@ -1,9 +1,9 @@
-# textSplitter  📖
+# TextSplitter 🌚
 
-[![npm version](https://img.shields.io/npm/v/textsplitter.svg?style=for-the-badge&colorB=%23000)](https://www.npmjs.com/package/textsplitter)
-[![license](https://img.shields.io/npm/l/textsplitter.svg?style=for-the-badge&colorB=%23000)](https://github.com/nielsreijnders/textsplitter/blob/master/LICENSE)
-[![dependencies](https://img.shields.io/badge/dependencies-none-ff69b4.svg?style=for-the-badge&colorB=%23000)](https://github.com)
-[![gzip size](https://img.shields.io/bundlephobia/minzip/textsplitter.svg?colorB=black&style=for-the-badge)](https://unpkg.com/textsplitter)
+[![npm version](https://img.shields.io/npm/v/textsplitter.svg?style=for-the-badge&colorB=%23BFB1B2)](https://www.npmjs.com/package/textsplitter)
+[![gzip size](https://img.shields.io/bundlephobia/minzip/textsplitter.svg?colorB=%23BFB1B2&label=GZIP%20SIZE&style=for-the-badge)](https://unpkg.com/textsplitter)
+[![license](https://img.shields.io/npm/l/textsplitter.svg?style=for-the-badge&colorB=%23BFB1B2)](https://github.com/nielsreijnders/textsplitter/blob/master/LICENSE)
+[![dependencies](https://img.shields.io/badge/dependencies-none-ff69b4.svg?style=for-the-badge&colorB=%23BFB1B2)](https://github.com)
 
 Tiny library to split each characters / words / lines 
 
@@ -20,7 +20,11 @@ import {splitLetters, splitWords, splitLines} from 'textsplitter';
 
 //Openingtag & closingtag has to be a string
 splitLetters(container, openingtag, closingtag);
+
+//It is pretty simple so..
 splitWords(container, openingtag, closingtag);
+
+//So I don't really need a documentation right?
 splitLines(container, openingtag, closingtag);
 ```
 
@@ -29,13 +33,13 @@ splitLines(container, openingtag, closingtag);
 ```js
 wrapLines(document.getElementById("container"), "<span><thisiscoolhuh>", "</thisiscoolhuh></span>");
 ```
-###### So you don't have to run the demo :p
+###### output
 
 ![example.gif](https://media.giphy.com/media/jxchZz0EDhQ7QmYEwD/giphy.gif)
 
 ##### Notice
 
-> This library only breaks each line! You can add your own animations with by example css or gsap.
+> This library only breaks each line / word or letter! You can add your own animations with by example css or gsap.
 
 ##### To dos
 
