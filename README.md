@@ -1,4 +1,4 @@
-# textSplitter  🔪
+# textSplitter  📖
 
 [![npm version](https://img.shields.io/npm/v/wraplines.svg?style=for-the-badge&colorB=%23000)](https://www.npmjs.com/package/wraplines)
 [![license](https://img.shields.io/npm/l/wraplines.svg?style=for-the-badge&colorB=%23000)](https://github.com/nielsreijnders/wrapLines/blob/master/LICENSE)
