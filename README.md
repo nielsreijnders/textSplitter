@@ -19,7 +19,9 @@ npm install textsplitter --save
 import {splitLetters, splitWords, splitLines} from 'textsplitter';
 
 //Openingtag & closingtag has to be a string
-wrapLines(container, openingtag, closingtag);
+splitLetters(container, openingtag, closingtag);
+splitWords(container, openingtag, closingtag);
+splitLines(container, openingtag, closingtag);
 ```
 
 ##### Example
