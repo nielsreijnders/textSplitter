@@ -31,7 +31,7 @@ splitLines(container, openingtag, closingtag);
 ##### Example
 
 ```js
-wrapLines(document.getElementById("container"), "<span><thisiscoolhuh>", "</thisiscoolhuh></span>");
+splitLines(document.getElementById("container"), "<span><thisiscoolhuh>", "</thisiscoolhuh></span>");
 ```
 ###### output
 
