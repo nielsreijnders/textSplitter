@@ -13,6 +13,7 @@
         "textsplitter"
     ],
     "devDependencies": {
+        
         "microbundle": "^0.9.0"
     },
     "scripts": {
