@@ -1,9 +1,9 @@
-# TextSplitter 🦚
+# TextSplitter 🥭
 
-[![npm version](https://img.shields.io/npm/v/textsplitter.svg?style=for-the-badge&colorB=%23BFB1B2)](https://www.npmjs.com/package/textsplitter)
-[![gzip size](https://img.shields.io/bundlephobia/minzip/textsplitter.svg?colorB=%23BFB1B2&label=GZIP%20SIZE&style=for-the-badge)](https://unpkg.com/textsplitter)
-[![license](https://img.shields.io/npm/l/textsplitter.svg?style=for-the-badge&colorB=%23BFB1B2)](https://github.com/nielsreijnders/textsplitter/blob/master/LICENSE)
-[![dependencies](https://img.shields.io/badge/dependencies-none-ff69b4.svg?style=for-the-badge&colorB=%23BFB1B2)](https://github.com)
+[![npm version](https://img.shields.io/npm/v/textsplitter.svg?style=for-the-badge&colorB=ACC7C3)](https://www.npmjs.com/package/textsplitter)
+[![gzip size](https://img.shields.io/bundlephobia/minzip/textsplitter.svg?colorB=ACC7C3&label=GZIP%20SIZE&style=for-the-badge)](https://unpkg.com/textsplitter)
+[![license](https://img.shields.io/npm/l/textsplitter.svg?style=for-the-badge&colorB=ACC7C3)](https://github.com/nielsreijnders/textsplitter/blob/master/LICENSE)
+[![dependencies](https://img.shields.io/badge/dependencies-none-ff69b4.svg?style=for-the-badge&colorB=ACC7C3)](https://github.com)
 
 Tiny library to split each characters, words or lines! 
 
