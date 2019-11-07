@@ -3,7 +3,7 @@ export function splitLetters(container, opentag, closingtag) {
 }
 
 export function splitWords(container, opentag, closingtag) {
-    container.innerHTML = container.textContent.replace(/./g, opentag + "$&" + closingtag);
+    container.innerHTML = container.textContent.replace(/\S+/g, opentag + "$&" + closingtag);
 }
 
 export function splitLines(container, opentag, closingtag) {
