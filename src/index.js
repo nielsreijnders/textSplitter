@@ -10,7 +10,7 @@ export function splitLines(container, opentag, closingtag) {
     var spans = container.children,
         top = 0,
         tmp = '';
-    container.innerHTML = container.textContent.replace(/\S+/g, '<n>$&</n>');
+    container.innerHTML = container.innerHTML.replace(/\S+/g, '<n>$&</n>');
     for (let i = 0; i < spans.length; i++) {
         var rect = spans[i].getBoundingClientRect().top;
         if (top < rect) tmp += closingtag + opentag;
