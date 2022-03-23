@@ -13,7 +13,7 @@
         "textsplitter"
     ],
     "devDependencies": {
-        "microbundle": "^0.9.0"
+        "microbundle": "^0.14.2"
     },
     "scripts": {
         "build": "microbundle --name textsplitter --format es,umd --sourcemap false"
