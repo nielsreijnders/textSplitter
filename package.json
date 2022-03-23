@@ -5,8 +5,8 @@
     "license": "MIT",
     "repository": "nielsreijnders/textsplitter",
     "main": "dist/textsplitter.js",
+    "types": "dist/index.d.ts",
     "unpkg": "dist/textsplitter.umd.js",
-    "source": "src/index.ts",
     "keywords": [
         "tiny",
         "npm",
