@@ -22,5 +22,3 @@ export function splitLines(container, opentag, closingtag) {
 
     container.innerHTML = tmp += closingtag;
 }
-
-export default { splitLetters, splitLines, splitWords }
