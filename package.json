@@ -16,7 +16,7 @@
         "microbundle": "^0.14.2"
     },
     "scripts": {
-        "build": "microbundle --name textsplitter --format es,umd --sourcemap false"
+        "build": "microbundle --name textsplitter"
     },
     "files": [
         "dist"
