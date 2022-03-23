@@ -10,13 +10,16 @@ export function splitLines(container, opentag, closingtag) {
     var spans = container.children,
         top = 0,
         tmp = '';
+
     container.innerHTML = container.innerHTML.replace(/\S+/g, '<n>$&</n>');
-    for (let i = 0; i < spans.length; i++) {
-        var rect = spans[i].getBoundingClientRect().top;
+
+    [...spans].forEach((span) => {
+        const rect = span.getBoundingClientRect().top;
         if (top < rect) tmp += closingtag + opentag;
         top = rect;
-        tmp += spans[i].textContent + ' ';
-    }
+        tmp += `${span.textContent} `;
+    });
+
     container.innerHTML = tmp += closingtag;
 }
 
