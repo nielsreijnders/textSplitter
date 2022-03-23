@@ -4,7 +4,7 @@
     "description": "wraps each line in a paragraph in an element",
     "license": "MIT",
     "repository": "nielsreijnders/textsplitter",
-    "main": "dist/textsplitter.mjs",
+    "main": "dist/textsplitter.js",
     "unpkg": "dist/textsplitter.umd.js",
     "keywords": [
         "tiny",
