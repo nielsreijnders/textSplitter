@@ -6,6 +6,7 @@
     "repository": "nielsreijnders/textsplitter",
     "main": "dist/textsplitter.js",
     "unpkg": "dist/textsplitter.umd.js",
+    "source": "src/index.ts",
     "keywords": [
         "tiny",
         "npm",

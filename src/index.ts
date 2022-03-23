@@ -1,12 +1,12 @@
-export function splitLetters(container, opentag, closingtag) {
+export function splitLetters(container: HTMLElement, opentag: string, closingtag: string) {
     container.innerHTML = container.textContent.replace(/\S/g, opentag + "$&" + closingtag);
 }
 
-export function splitWords(container, opentag, closingtag) {
+export function splitWords(container: HTMLElement, opentag: string, closingtag: string) {
     container.innerHTML = container.textContent.replace(/\S+/g, opentag + "$&" + closingtag);
 }
 
-export function splitLines(container, opentag, closingtag) {
+export function splitLines(container: HTMLElement, opentag: string, closingtag: string) {
     var spans = container.children,
         top = 0,
         tmp = '';
