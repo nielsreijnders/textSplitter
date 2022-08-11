@@ -14,8 +14,8 @@ export function splitLines(container: HTMLElement, opentag: string, closingtag: 
     container.innerHTML = container.innerHTML.replace(/\S+/g, '<n>$&</n>');
 
     for (let i = 0; i < spans.length; i++) {
-        var rect = spans[i].getBoundingClientRect().top;
-        if (top < rect) tmp += closingtag + opentag;
+        var rect = Math.abs(spans[i].getBoundingClientRect().top);
+        if (top < rect || top > rect) tmp += closingtag + opentag;
         top = rect;
         tmp += spans[i].innerHTML + ' ';
     }
