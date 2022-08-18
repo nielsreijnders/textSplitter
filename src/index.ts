@@ -1,8 +1,11 @@
 export function splitLetters(container: HTMLElement, opentag: string, closingtag: string) {
     let tmp = '';
 
-    const html = container.innerHTML!.match(/(?:<[^>]+>)/g) || [''];
-    container.innerHTML!.split(/(?:<[^>]+>)/g)?.forEach((string, index) => {
+    const html = [...container.innerHTML!.match(/<[^>]+>/g)! || '', ''];
+
+    console.log(html)
+
+    container.innerHTML!.split(/<[^>]+>/g)?.forEach((string, index) => {
         return tmp += (string.replace(/\S/g, opentag + "$&" + closingtag) + html![index]);
     });
 
@@ -12,8 +15,8 @@ export function splitLetters(container: HTMLElement, opentag: string, closingtag
 export function splitWords(container: HTMLElement, opentag: string, closingtag: string) {
     let tmp = '';
 
-    const html = container.innerHTML!.match(/(?:<[^>]+>)/g) || [''];
-    container.innerHTML!.split(/(?:<[^>]+>)/g)?.forEach((string, index) => {
+    const html = [...container.innerHTML!.match(/<[^>]+>/g)! || '', ''];
+    container.innerHTML!.split(/<[^>]+>/g)?.forEach((string, index) => {
         return tmp += (string.replace(/\S+/g, opentag + "$&" + closingtag) + html![index]);
     });
 
