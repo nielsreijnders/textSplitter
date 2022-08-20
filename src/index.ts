@@ -3,8 +3,6 @@ export function splitLetters(container: HTMLElement, opentag: string, closingtag
 
     const html = [...container.innerHTML!.match(/<[^>]+>/g)! || '', ''];
 
-    console.log(html)
-
     container.innerHTML!.split(/<[^>]+>/g)?.forEach((string, index) => {
         return tmp += (string.replace(/\S/g, opentag + "$&" + closingtag) + html![index]);
     });
