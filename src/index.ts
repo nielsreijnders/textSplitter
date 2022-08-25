@@ -24,22 +24,29 @@ export function splitWords(container: HTMLElement, opentag: string, closingtag: 
 export function splitLines(container: HTMLElement, opentag: string, closingtag: string) {
     splitWords(container, '<n>', '</n>');
 
-    var spans = container.querySelectorAll('n'),
+    var // Todo: split lines on each n tag to prevent a html tag which is longer than the line length
+        // spans = container.querySelectorAll('n'),
         htmlTags = container.children,
         whiteSpace = container.innerHTML,
         top = 0,
         tmp = '';
 
-    for (let i = 0; i < spans.length; i++) {
-        var rect = Math.abs(spans[i].getBoundingClientRect().top);
+
+    for (let i = 0; i < htmlTags.length; i++) {
+        var rect = Math.abs(htmlTags[i].getBoundingClientRect().top);
         if (top < rect || top > rect) tmp += closingtag + opentag;
         top = rect;
 
+        // if (!htmlTags[i]) return null;
+
         const replacedHtmlTags = htmlTags[i].outerHTML.toString();
 
-        // Maybe better to use regex to replace the html tags since this might be a performance issue
-        tmp += replacedHtmlTags.replace('<n>', '').replace('</n>', '') + (whiteSpace.includes(replacedHtmlTags + ' ') ? ' ' : '');
+        // console.log(replacedHtmlTags.split(/<[n^\/>]+>/g).join(''));
+
+        tmp += replacedHtmlTags.split(/<[n^\/>]+>/g).join('') + (whiteSpace.includes(replacedHtmlTags + ' ') ? ' ' : '');
     }
+
+    // console.log(tmp);
 
     container.innerHTML = tmp += closingtag;
 }
