@@ -17,7 +17,8 @@
         "microbundle": "^0.14.2"
     },
     "scripts": {
-        "build": "microbundle --name textsplitter"
+        "build": "microbundle --name textsplitter",
+        "watch": "microbundle watch --name textsplitter"
     },
     "files": [
         "dist"

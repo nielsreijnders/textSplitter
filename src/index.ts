@@ -21,32 +21,55 @@ export function splitWords(container: HTMLElement, opentag: string, closingtag: 
     container.innerHTML = tmp;
 }
 
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return str.trim().replace(/\s+/g, ' ');
+}
+
 export function splitLines(container: HTMLElement, opentag: string, closingtag: string) {
+    const htmlTags = [...container.innerHTML!.match(/<[^>]+>/g)! || '', ''];
+    const containerSplit = container.innerHTML!.split(/<[^>]+>/g);
+    
+    const whiteSpaces = [...container.textContent!.match(/\S+/g)!];
+
     splitWords(container, '<n>', '</n>');
 
-    var // Todo: split lines on each n tag to prevent a html tag which is longer than the line length
-        // spans = container.querySelectorAll('n'),
-        htmlTags = container.children,
-        whiteSpace = container.innerHTML,
-        top = 0,
-        tmp = '';
+    const spans = container.querySelectorAll('n');
+    const tops: number[] = [];
+    const splitPostionsTops: number[] = [0];
+    const words: string[] = [];
+    let finalString = '';
 
+    spans.forEach(span => {
+        const { top } = span.getBoundingClientRect();
+        tops.push(top);
+        words.push(span.textContent as string);
+    });
+    
+    let lastTop = 0;
+    let count = 0;
+    
+    containerSplit?.forEach((string, i) => {
+        const sanitized_string = sanitizeString(string);
+        const { length } = sanitized_string.split(' ');
+        splitPostionsTops.push(splitPostionsTops[i] + length);
 
-    for (let i = 0; i < htmlTags.length; i++) {
-        var rect = Math.abs(htmlTags[i].getBoundingClientRect().top);
-        if (top < rect || top > rect) tmp += closingtag + opentag;
-        top = rect;
+        const splicedTops = tops.slice(splitPostionsTops[i], splitPostionsTops[i] + length);
+        
+        splicedTops.forEach((top) => {
+            let whitespace = '';
+            if (lastTop < top || lastTop > top) finalString += closingtag + opentag;
 
-        // if (!htmlTags[i]) return null;
+            if(whiteSpaces[count].includes(words[count])) whitespace = ' ' 
+            else whiteSpaces.splice(0, 0, ' ');
 
-        const replacedHtmlTags = htmlTags[i].outerHTML.toString();
+            finalString += whitespace + words[count];
+            count += 1;
+            lastTop = top;
+        });
+    
+        finalString += htmlTags[i];
+    });
 
-        // console.log(replacedHtmlTags.split(/<[n^\/>]+>/g).join(''));
-
-        tmp += replacedHtmlTags.split(/<[n^\/>]+>/g).join('') + (whiteSpace.includes(replacedHtmlTags + ' ') ? ' ' : '');
-    }
-
-    // console.log(tmp);
-
-    container.innerHTML = tmp += closingtag;
+    container.innerHTML = finalString += closingtag;
 }
