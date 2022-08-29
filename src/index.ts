@@ -60,7 +60,7 @@ export function splitLines(container: HTMLElement, opentag: string, closingtag: 
             let whitespace = '';
             if (lastTop < top || lastTop > top) finalString += closingtag + opentag;
 
-            if(whiteSpaces[count].includes(words[count])) whitespace = ' ' 
+            if(whiteSpaces[count] && whiteSpaces[count].includes(words[count])) whitespace = ' ' 
             else whiteSpaces.splice(0, 0, ' ');
 
             finalString += whitespace + words[count];
