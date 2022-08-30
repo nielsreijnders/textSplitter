@@ -26,6 +26,13 @@ splitWords(container, openingtag, closingtag);
 
 //So I don't really need a documentation right?
 splitLines(container, openingtag, closingtag);
+
+// React usage
+useEffect(() => {
+  // It is not specific made for React but obv it works fine
+  splitLines(ref.current, openingtag, closingtag);
+}, [])
+
 ```
 
 ##### Example
@@ -40,10 +47,5 @@ splitLines(document.getElementById("container"), "<span><thisiscoolhuh>", "</thi
 ##### Notice
 
 > This library only breaks each line / word or letter! You can add your own animations with by example css or gsap.
-
-##### To dos
-
-- [ ] resize option
-- [x] option to also split words/characters
 
 ###### MIT © <a href="#?????portfolio_coming_soon">Niels Reijnders</a>

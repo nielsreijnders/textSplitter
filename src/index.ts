@@ -46,7 +46,7 @@ export function splitLines(container: HTMLElement, opentag: string, closingtag: 
     let finalString = '';
     let lastTop = 0;
     let count = 0;
-    
+
     containerSplit?.forEach((string, i) => {
         const sanitized_string = sanitizeString(string);
         const { length } = sanitized_string.split(' ');
@@ -59,16 +59,15 @@ export function splitLines(container: HTMLElement, opentag: string, closingtag: 
             splicedTops.forEach(({top, text}) => {
                 let whitespace = '';
                 if (lastTop < top || lastTop > top) {
-                    if (htmlTags[i].includes('/') && htmlTags[i + 1].includes('/')) {            
+                    
+                    if (htmlTags[i].includes('/') && !htmlTags[i + 1].includes('/')) {            
                         const tags = htmlClosingTags.slice(0, i + i);
                         const half = Math.ceil(tags.length / 2);
                         const openingTags = tags.slice(0, half);
                         const closingTags = tags.slice(half);
                         
                         htmlClosingTags.splice(0, i + i);
-
-                        console.log(closingTags)
-
+                        
                         finalString += closingTags.join('') + closingtag + opentag + openingTags.join('')
                     } else {
                         finalString += closingtag + opentag
