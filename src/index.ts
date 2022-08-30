@@ -29,45 +29,64 @@ function sanitizeString(str){
 export function splitLines(container: HTMLElement, opentag: string, closingtag: string) {
     const htmlTags = [...container.innerHTML!.match(/<[^>]+>/g)! || '', ''];
     const containerSplit = container.innerHTML!.split(/<[^>]+>/g);
-    
+    const htmlClosingTags = [...container.innerHTML!.match(/<[^>]+>/g)! || ''];
     const whiteSpaces = [...container.textContent!.match(/\S+/g)!];
 
     splitWords(container, '<n>', '</n>');
 
     const spans = container.querySelectorAll('n');
-    const tops: number[] = [];
+    const tops: {top: number, text: string}[] = [];
     const splitPostionsTops: number[] = [0];
-    const words: string[] = [];
-    let finalString = '';
-
+    
     spans.forEach(span => {
         const { top } = span.getBoundingClientRect();
-        tops.push(top);
-        words.push(span.textContent as string);
+        tops.push({ top, text: span.textContent as string });
     });
     
+    let finalString = '';
     let lastTop = 0;
     let count = 0;
     
     containerSplit?.forEach((string, i) => {
         const sanitized_string = sanitizeString(string);
         const { length } = sanitized_string.split(' ');
-        splitPostionsTops.push(splitPostionsTops[i] + length);
 
-        const splicedTops = tops.slice(splitPostionsTops[i], splitPostionsTops[i] + length);
-        
-        splicedTops.forEach((top) => {
-            let whitespace = '';
-            if (lastTop < top || lastTop > top) finalString += closingtag + opentag;
+        if (!!string) {
+            splitPostionsTops.push(splitPostionsTops[i] + length);
 
-            if(whiteSpaces[count] && whiteSpaces[count].includes(words[count])) whitespace = ' ' 
-            else whiteSpaces.splice(0, 0, ' ');
+            const splicedTops = tops.slice(splitPostionsTops[i], splitPostionsTops[i] + length);
+                
+            splicedTops.forEach(({top, text}) => {
+                let whitespace = '';
+                if (lastTop < top || lastTop > top) {
+                    if (htmlTags[i].includes('/') && htmlTags[i + 1].includes('/')) {            
+                        const tags = htmlClosingTags.slice(0, i + i);
+                        const half = Math.ceil(tags.length / 2);
+                        const openingTags = tags.slice(0, half);
+                        const closingTags = tags.slice(half);
+                        
+                        htmlClosingTags.splice(0, i + i);
 
-            finalString += whitespace + words[count];
-            count += 1;
-            lastTop = top;
-        });
-    
+                        console.log(closingTags)
+
+                        finalString += closingTags.join('') + closingtag + opentag + openingTags.join('')
+                    } else {
+                        finalString += closingtag + opentag
+                    }
+                };
+                
+                // Whitespace is still an issue
+                if(whiteSpaces[count] && whiteSpaces[count].includes(text)) whitespace = ' ' 
+                else whiteSpaces.splice(0, 0, ' ');
+
+                finalString += text + whitespace;
+                count += 1;
+                lastTop = top;
+            });
+
+        // If string is empty pass the current splitPosition and add the html tag
+        } else splitPostionsTops.push(splitPostionsTops[i]);
+
         finalString += htmlTags[i];
     });
 
