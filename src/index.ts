@@ -27,7 +27,7 @@ function sanitizeString(str){
 }
 
 export function splitLines(container: HTMLElement, opentag: string, closingtag: string) {
-    const htmlTags = [...container.innerHTML!.match(/<[^>]+>/g)! || '', ''];
+    const htmlTags = [...container.innerHTML!.match(/<[^>]+>/g)! || '', '', ''];
     const containerSplit = container.innerHTML!.split(/<[^>]+>/g);
     const htmlClosingTags = [...container.innerHTML!.match(/<[^>]+>/g)! || ''];
     const whiteSpaces = [...container.textContent!.match(/\S+/g)!];
@@ -46,6 +46,17 @@ export function splitLines(container: HTMLElement, opentag: string, closingtag: 
     let finalString = '';
     let lastTop = 0;
     let count = 0;
+    let htmlOpenTag = false;
+    let htmlLineTags: string[][] = [];
+    let htmlCount = -1;
+
+    containerSplit.forEach((string, i) => {
+        console.log(htmlTags[i]);
+        if (htmlTags[i].includes('/') && !htmlTags[i + 1].includes('/')) {            
+            htmlLineTags.push(htmlClosingTags.slice(0, i + 1));
+            htmlClosingTags.splice(0, i + 1);
+        }
+    })
 
     containerSplit?.forEach((string, i) => {
         const sanitized_string = sanitizeString(string);
@@ -59,19 +70,13 @@ export function splitLines(container: HTMLElement, opentag: string, closingtag: 
             splicedTops.forEach(({top, text}) => {
                 let whitespace = '';
                 if (lastTop < top || lastTop > top) {
-                    
-                    if (htmlTags[i].includes('/') && !htmlTags[i + 1].includes('/')) {            
-                        const tags = htmlClosingTags.slice(0, i + i);
-                        const half = Math.ceil(tags.length / 2);
-                        const openingTags = tags.slice(0, half);
-                        const closingTags = tags.slice(half);
-                        
-                        htmlClosingTags.splice(0, i + i);
-                        
-                        finalString += closingTags.join('') + closingtag + opentag + openingTags.join('')
-                    } else {
-                        finalString += closingtag + opentag
-                    }
+                    if (htmlOpenTag) {
+                        const half = Math.ceil(htmlLineTags[htmlCount].length / 2);
+                        const openingTags = htmlLineTags[htmlCount].slice(0, half);
+                        const closingTags = htmlLineTags[htmlCount].slice(half);
+                        finalString += closingTags.join('') + closingtag + opentag + openingTags.join('');
+
+                    } else finalString += closingtag + opentag
                 };
                 
                 // Whitespace is still an issue
@@ -85,6 +90,11 @@ export function splitLines(container: HTMLElement, opentag: string, closingtag: 
 
         // If string is empty pass the current splitPosition and add the html tag
         } else splitPostionsTops.push(splitPostionsTops[i]);
+
+        if (!htmlTags[i].includes('/') && htmlTags[i + 1].includes('/')) {
+            htmlCount = htmlCount + 1
+            htmlOpenTag = true;
+        } else htmlOpenTag = false;
 
         finalString += htmlTags[i];
     });
