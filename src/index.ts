@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 export function splitLetters (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
-  const html: string[] = [...container.innerHTML.match(/<[^>]+>/g)!, '']
+  const html: string[] = [...container.innerHTML.match(/<[^>]+>/g)! || '', '']
   let tmp = ''
 
   container.innerHTML.split(/<[^>]+>/g)?.forEach((string, index) => {
@@ -15,7 +15,7 @@ export function splitLetters (container: HTMLElement, opentag: string, closingta
 }
 
 export function splitWords (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
-  const html: string[] = [...container.innerHTML?.match(/<[^>]+>/g)!, '']
+  const html: string[] = [...container.innerHTML?.match(/<[^>]+>/g)! || '', '']
   let tmp = ''
 
   container.innerHTML.split(/<[^>]+>/g)?.forEach((string, index) => {
@@ -35,7 +35,7 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
   const htmlTags = [...container.innerHTML.match(/<[^>]+>/g)! || '', '', '']
   const containerSplit = container.innerHTML.split(/<[^>]+>/g)
   const htmlClosingTags = [...container.innerHTML.match(/<[^>]+>/g)! || '']
-  const whiteSpaces = [...container.textContent!.match(/\S+/g)!]
+  const whiteSpaces = [...container.textContent!.match(/\S+/g)! || '']
 
   splitWords(container, '<n>', '</n>')
 
