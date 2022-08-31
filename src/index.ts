@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 export function splitLetters (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
@@ -31,9 +32,9 @@ function sanitizeString (str: string): string {
 }
 
 export function splitLines (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
-  const htmlTags = [...container.innerHTML.match(/<[^>]+>/g)!, '', '']
+  const htmlTags = [...container.innerHTML.match(/<[^>]+>/g)! || '', '', '']
   const containerSplit = container.innerHTML.split(/<[^>]+>/g)
-  const htmlClosingTags = [...container.innerHTML.match(/<[^>]+>/g)!]
+  const htmlClosingTags = [...container.innerHTML.match(/<[^>]+>/g)! || '']
   const whiteSpaces = [...container.textContent!.match(/\S+/g)!]
 
   splitWords(container, '<n>', '</n>')
