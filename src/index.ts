@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
@@ -83,7 +84,7 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
         };
 
         // Whitespace is still an issue
-        if ((whiteSpaces[count].length > 0) && whiteSpaces[count].includes(text)) whitespace = ' '
+        if (whiteSpaces[count] && whiteSpaces[count]?.includes(text)) whitespace = ' '
         else whiteSpaces.splice(0, 0, ' ')
 
         finalString += text + whitespace
