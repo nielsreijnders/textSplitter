@@ -14,7 +14,14 @@
         "textsplitter"
     ],
     "devDependencies": {
-        "microbundle": "^0.14.2"
+        "@typescript-eslint/eslint-plugin": "^5.36.1",
+        "eslint": "^8.23.0",
+        "eslint-config-standard-with-typescript": "^22.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-n": "^15.2.5",
+        "eslint-plugin-promise": "^6.0.1",
+        "microbundle": "^0.14.2",
+        "typescript": "^4.8.2"
     },
     "scripts": {
         "build": "microbundle --name textsplitter",
