@@ -26,8 +26,8 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   return container
 }
 
-const sanitizeString = (str: string): string => {
-  return str.replace(/[^a-z0-9áéíóúñü.,_-]/gim, '').trim().replace(/\s+/g, ' ')
+function sanitizeString (str: string): string {
+  return str.replace(/[^a-z0-9áéíóúñü .,_-]/gim, '').trim().replace(/\s+/g, ' ')
 }
 
 export function splitLines (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
