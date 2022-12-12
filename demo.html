@@ -4,7 +4,8 @@
   setTimeout(() => {
     var startTime = performance.now()
 
-    window.textsplitter.splitLines(document.querySelector('.text'), '<span class="line">', '</span>');
+    window.textsplitter.splitLines(document.querySelector('.text'), '<span class="mask"><span class="lines">', '</span></span>');
+    
 
     var endTime = performance.now()
 
@@ -13,7 +14,7 @@
 </script>
 
 <body>
-  <p class="text" style="font-size: 200px">
-    Premium gietvloeren eifjios jisofjijse iojseiofji sjfioseej iosjiof sijiof jseio
+  <p class="text" style="font-size: 150px">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quas nesciunt tempora ducimus repudiandae quisquam, sunt at soluta. Id beatae distinctio temporibus adipisci doloribus quo recusandae quos minus consequuntur deleniti.
   </p>
 </body>

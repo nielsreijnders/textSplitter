@@ -28,82 +28,46 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   return container
 }
 
-function sanitizeString (str: string): string {
-  return str.replace(/[^a-z0-9áéíóúñü .,_-]/gim, '').trim().replace(/\s+/g, ' ')
-}
-
-export function splitLines (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
-  const htmlTags = [...container.innerHTML.match(/<[^>]+>/g)! || '', '', '']
-  const containerSplit = container.innerHTML.split(/<[^>]+>/g)
-  const htmlClosingTags = [...container.innerHTML.match(/<[^>]+>/g)! || '']
-  const whiteSpaces = [...container.textContent!.match(/\S+/g)! || '']
-
+export function splitLines (container: HTMLElement, opentag: string, closingtag: string, customClass?: string): HTMLElement {
   splitWords(container, '<n>', '</n>')
 
-  const spans = container.querySelectorAll('n')
-  const tops: Array<{top: number, text: string}> = []
-  const splitPostionsTops: number[] = [0]
+  let lastY = -9999
+  const array: any = []
+  container.querySelectorAll('n').forEach((node) => {
+    const { y } = node.getBoundingClientRect()
 
-  spans.forEach(span => {
-    const { top } = span.getBoundingClientRect()
-    tops.push({ top, text: span.textContent as string })
-  })
-
-  let finalString = ''
-  let lastTop = 0
-  let count = 0
-  let htmlOpenTag = false
-  const htmlLineTags: string[][] = []
-  let htmlCount = -1
-
-  containerSplit.forEach((_string, i) => {
-    if (htmlTags[i].includes('/') && !htmlTags[i + 1].includes('/')) {
-      htmlLineTags.push(htmlClosingTags.slice(0, i + 1))
-      htmlClosingTags.splice(0, i + 1)
+    if (y > lastY) {
+      lastY = y
+      array.push(`${closingtag}${opentag}${node.innerHTML}`)
+    } else {
+      array.push(node.innerHTML)
     }
   })
 
-  containerSplit?.forEach((string, i) => {
-    const SANITIZED_STRING = sanitizeString(string)
-    const { length } = SANITIZED_STRING.split(' ')
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  container.innerHTML = `${array.join(' ')}${closingtag}`
 
-    if (string.length > 0) {
-      splitPostionsTops.push(splitPostionsTops[i] + length)
+  return container
+}
 
-      const splicedTops = tops.slice(splitPostionsTops[i], splitPostionsTops[i] + length)
+export function richtextSplitLines (container: HTMLElement, opentag: string, closingtag: string, customClass?: string): HTMLElement {
+  splitWords(container, `${opentag}<n>`, `</n>${closingtag}`)
 
-      splicedTops.forEach(({ top, text }) => {
-        let whitespace = ''
-        if (lastTop < top || lastTop > top) {
-          if (htmlOpenTag) {
-            const half = Math.ceil(htmlLineTags[htmlCount].length / 2)
-            const openingTags = htmlLineTags[htmlCount].slice(0, half)
-            const closingTags = htmlLineTags[htmlCount].slice(half)
-            finalString += closingTags.join('') + closingtag + opentag + openingTags.join('')
-          } else finalString += closingtag + opentag
-        };
+  let lastY = -9999
+  let count = 0
 
-        // Whitespace is still an issue
-        if (whiteSpaces[count] && whiteSpaces[count]?.includes(text)) whitespace = ' '
-        else whiteSpaces.splice(0, 0, ' ')
+  container.querySelectorAll('n').forEach((node) => {
+    const { y } = node.getBoundingClientRect()
 
-        finalString += text + whitespace
-        count += 1
-        lastTop = top
-      })
+    console.log(node, y)
 
-      // If string is empty pass the current splitPosition and add the html tag
-    } else splitPostionsTops.push(splitPostionsTops[i])
+    if (y > lastY) {
+      count += 1
+      lastY = y
+    }
 
-    if (!htmlTags[i].includes('/') && htmlTags[i + 1].includes('/')) {
-      htmlCount = htmlCount + 1
-      htmlOpenTag = true
-    } else htmlOpenTag = false
-
-    finalString += htmlTags[i]
+    node.outerHTML = `<span class="${customClass ?? ''}line-${count}">${node.innerHTML}</span>`
   })
-
-  container.innerHTML = finalString += closingtag
 
   return container
 }
