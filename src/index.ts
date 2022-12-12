@@ -59,8 +59,6 @@ export function richtextSplitLines (container: HTMLElement, opentag: string, clo
   container.querySelectorAll('n').forEach((node) => {
     const { y } = node.getBoundingClientRect()
 
-    console.log(node, y)
-
     if (y > lastY) {
       count += 1
       lastY = y
