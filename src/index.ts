@@ -28,7 +28,7 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   return container
 }
 
-export function splitLines (container: HTMLElement, opentag: string, closingtag: string, customClass?: string): HTMLElement {
+export function splitLines (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
   splitWords(container, '<n>', '</n>')
 
   let lastY = -9999
