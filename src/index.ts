@@ -29,7 +29,7 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   return container
 }
 
-export function splitLines (container: HTMLElement, opentag: string, closingtag: string, customClass?: string): HTMLElement {
+export function splitLines (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
   splitWords(container, '<n>', '</n>')
 
   let lastY = -9999
@@ -85,13 +85,10 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
     nextLineOpeningTags.push(filteredOpeningTagsEndOfLine)
     const refactoredLine = `${opentag}${openingTagsLastLine.join('')}${string}${filteredOpeningTagsEndOfLine.slice().reverse().map(tag => tag.replace('<', '</')).join('')}${closingtag}`
 
-    console.log(refactoredLine)
-
     output += refactoredLine
     index += 1
   })
 
-  console.log(output)
   container.innerHTML = output
 
   return container
