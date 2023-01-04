@@ -4,7 +4,7 @@
   setTimeout(() => {
     var startTime = performance.now()
 
-    window.textsplitter.splitLines(document.querySelector('.text'), '<span class="mask"><span class="lines">', '</span></span>');
+    window.textsplitter.splitLines(document.querySelector('.text'), '<span>', '</span>');
     
 
     var endTime = performance.now()
@@ -14,7 +14,7 @@
 </script>
 
 <body>
-  <p class="text" style="font-size: 150px">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quas nesciunt tempora ducimus repudiandae quisquam, sunt at soluta. Id beatae distinctio temporibus adipisci doloribus quo recusandae quos minus consequuntur deleniti.
+  <p class="text" style="font-size: 30px">
+    <i>Lorem ipsum  dolor sit amet <b>consectetur adipisicing elit. Adipisci corporis corrupti voluptate. Quo pariatur distinctio ipsum ipsam neque soluta, repellendus magnam vitae consequuntur id deserunt incidunt corporis, eveniet iure tempora aperiam sint, praesentium odio? Quas cupiditate amet sed, ipsa voluptatem id eveniet</b> architecto nesciunt autem reprehenderit possimus, commodi odio minima.</i> Lorem ipsum dolor sit amet consectetur adipisicing elit. <b>Numquam voluptatum nulla aperiam consequatur explicabo laudantium? Magnam accusantium ab magni nostrum totam doloremque veniam, repellendus eius porro pariatur sapiente <a href="srs">inventore a aliquid temporibus iste labore? Eum maiores quisquam saepe. Veniam, ullam!</a></b>
   </p>
 </body>
