@@ -14,7 +14,7 @@ const resetContainer = (container: HTMLElement): (() => void) => {
 }
 
 export function splitLetters (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
-  const destroy = resetContainer(container)
+  const destroy = (): any => resetContainer(container)
 
   const html: string[] = [...container.innerHTML.match(/<[^>]+>/g)! || '', '']
   let tmp = ''
@@ -29,7 +29,7 @@ export function splitLetters (container: HTMLElement, opentag: string, closingta
 }
 
 export function splitWords (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
-  const destroy = resetContainer(container)
+  const destroy = (): any => resetContainer(container)
 
   const html: string[] = [...container.innerHTML?.match(/<[^>]+>/g)! || '', '']
   let tmp = ''
@@ -44,7 +44,7 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
 }
 
 export function splitLines (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
-  const destroy = resetContainer(container)
+  const destroy = (): any => resetContainer(container)
 
   splitWords(container, '<n>', '</n>')
 
