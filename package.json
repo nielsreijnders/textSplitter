@@ -1,6 +1,6 @@
 {
     "name": "textsplitter",
-    "version": "9.2.1",
+    "version": "9.2.2",
     "description": "wraps each line in a paragraph in an element",
     "license": "MIT",
     "repository": "nielsreijnders/textsplitter",
