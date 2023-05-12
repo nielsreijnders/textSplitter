@@ -4,12 +4,17 @@
   setTimeout(() => {
     var startTime = performance.now()
 
-    window.textsplitter.splitLines(document.querySelector('.text'), '<span>', '</span>');
+    const splitLines = window.textsplitter.splitLines(document.querySelector('.text'), '<span>', '</span>');
     
-
+    console.log(splitLines)
+    
     var endTime = performance.now()
 
     console.log(`Function took ${endTime - startTime} milliseconds`)
+
+    setTimeout(() => {
+      splitLines.destroy()
+    }, 3000)
   })
 </script>
 

@@ -3,7 +3,19 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-export function splitLetters (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
+const resetContainer = (container: HTMLElement): (() => void) => {
+  const oldHTML = container.innerHTML
+
+  const reset = (): void => {
+    container.innerHTML = oldHTML
+  }
+
+  return reset
+}
+
+export function splitLetters (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
+  const destroy = resetContainer(container)
+
   const html: string[] = [...container.innerHTML.match(/<[^>]+>/g)! || '', '']
   let tmp = ''
 
@@ -13,10 +25,12 @@ export function splitLetters (container: HTMLElement, opentag: string, closingta
 
   container.innerHTML = tmp
 
-  return container
+  return ({ container, destroy })
 }
 
-export function splitWords (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
+export function splitWords (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
+  const destroy = resetContainer(container)
+
   const html: string[] = [...container.innerHTML?.match(/<[^>]+>/g)! || '', '']
   let tmp = ''
 
@@ -26,10 +40,12 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
 
   container.innerHTML = tmp
 
-  return container
+  return ({ container, destroy })
 }
 
-export function splitLines (container: HTMLElement, opentag: string, closingtag: string): HTMLElement {
+export function splitLines (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
+  const destroy = resetContainer(container)
+
   splitWords(container, '<n>', '</n>')
 
   let lastY = -9999
@@ -91,5 +107,5 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
 
   container.innerHTML = output
 
-  return container
+  return ({ container, destroy })
 }
