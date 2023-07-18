@@ -53,7 +53,7 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   allElements.forEach((node, index) => {
     if (node.innerHTML.length === 1 && !node.innerHTML.match(/[.,?/#!$%^&*;:{}=\-_`~()]/g)) {
       const firstWord = allElements[(index || 1) - 1]
-      const secondWord = allElements[index + 1]
+      const secondWord = allElements[index + 1] ?? allElements[index]
       const { y: firstY } = firstWord.getBoundingClientRect()
       const { y: secondY } = secondWord.getBoundingClientRect()
 
