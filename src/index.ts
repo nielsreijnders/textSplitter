@@ -28,7 +28,7 @@ export function splitLetters (container: HTMLElement, opentag: string, closingta
   return ({ container, destroy })
 }
 
-export function splitWords (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
+function splitWordsHelper (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
   const destroy = resetContainer(container)
 
   const html: string[] = [...container.innerHTML?.match(/<[^>]+>/g)! || '', '']
@@ -39,6 +39,37 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   })
 
   container.innerHTML = tmp
+
+  return ({ container, destroy })
+}
+
+export function splitWords (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
+  const destroy = resetContainer(container)
+
+  splitWordsHelper(container, '<n>', '</n>')
+
+  const allElements = container.querySelectorAll('n')
+
+  allElements.forEach((node, index) => {
+    if (node.innerHTML.length === 1 && !node.innerHTML.match(/[.,?/#!$%^&*;:{}=\-_`~()]/g)) {
+      const firstWord = allElements[(index || 1) - 1]
+      const secondWord = allElements[index + 1]
+      const { y: firstY } = firstWord.getBoundingClientRect()
+      const { y: secondY } = secondWord.getBoundingClientRect()
+
+      if (firstY === secondY) {
+        const { width } = node.getBoundingClientRect()
+
+        if (width === 0) {
+          allElements[index].innerHTML = `${firstWord.innerHTML}${node.innerHTML}${secondWord.innerHTML}`
+          firstWord.remove()
+          secondWord.remove()
+        }
+      }
+    }
+  })
+
+  container.innerHTML = container.innerHTML.replace(/<n>/g, opentag).replace(/<\/n>/g, closingtag)
 
   return ({ container, destroy })
 }
