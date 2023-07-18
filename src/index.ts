@@ -58,13 +58,13 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
       const { y: secondY } = secondWord.getBoundingClientRect()
 
       if (firstY === secondY) {
-        const { width } = node.getBoundingClientRect()
-
-        if (width === 0) {
+        if (!node.innerHTML.match(/[^\w\u00AD]/g)) {
           allElements[index].innerHTML = `${firstWord.innerHTML}${node.innerHTML}${secondWord.innerHTML}`
           firstWord.remove()
           secondWord.remove()
         }
+      } else if (!node.innerHTML.match(/[^\w\u00AD]/g)) {
+        allElements[index].innerHTML = '-'
       }
     }
   })
