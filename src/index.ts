@@ -35,7 +35,7 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   let tmp = ''
 
   container.innerHTML.split(/<[^>]+>/g)?.forEach((string, index) => {
-    tmp += string.replace(/\S+/g, opentag + '$&' + closingtag) + html[index]
+    tmp += string.replace(/((\w+|-)|(\S))/g, opentag + '$1' + closingtag) + html[index]
   })
 
   container.innerHTML = tmp
@@ -79,6 +79,8 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
     // Remove closing tag from the end of the line
     const string = str.replace('</line>', '')
 
+    // console.log(string)
+
     // Get opening tags from the current line
     // ALSO SKIP ALL BR TAGS
     const openingtags: string[] = string.match(/<(?!\/)(?!br)[^>]+>/g)! ?? []
@@ -96,9 +98,9 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
     closingtags.push(...closingTagsLastLine)
 
     // Filter opening tags that are not closed
-    const filteredOpeningTagsEndOfLine = openingtags.slice().splice(0, openingtags.length - closingtags.length)
-
+    const filteredOpeningTagsEndOfLine = openingtags.slice().splice(0, openingtags.length - closingtags.length).reverse()
     nextLineOpeningTags.push(filteredOpeningTagsEndOfLine)
+
     const refactoredLine = `${opentag}${openingTagsLastLine.join('')}${string}${filteredOpeningTagsEndOfLine.slice().reverse().map(tag => tag.replace('<', '</')).join('')}${closingtag}`
 
     output += refactoredLine

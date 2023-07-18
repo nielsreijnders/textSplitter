@@ -5,52 +5,68 @@
 [![license](https://img.shields.io/npm/l/textsplitter.svg?style=for-the-badge&colorB=ACC7C3)](https://github.com/nielsreijnders/textsplitter/blob/master/LICENSE)
 [![dependencies](https://img.shields.io/badge/dependencies-none-ff69b4.svg?style=for-the-badge&colorB=ACC7C3)](https://github.com)
 
-Tiny library to split each characters, words or lines! New feature for splitlines function to preserve HTML tags.
+## Description
 
-#### Install
+TextSplitter is a lightweight library designed to split text into individual characters, words, or lines. It also includes a new feature to preserve HTML tags when using the splitLines function.
 
-```js
+## Installation
+
+You can install TextSplitter using npm or yarn:
+
+```bash
 npm install textsplitter --save
 ```
+or
+```bash
+yarn add textsplitter
+```
 
-#### Usage
+## Usage
 
-```js
+Import the required functions from 'textsplitter':
+
+```javascript
 import { splitLetters, splitWords, splitLines } from 'textsplitter';
+```
 
-// HTML ELEMENT, STRING, STRING
-splitLetters(container, openingtag, closingtag);
+Use the following functions according to your requirements:
 
-// HTML ELEMENT, STRING, STRING
-splitWords(container, openingtag, closingtag);
+- `splitLetters(container, openingtag, closingtag)`: Splits individual characters.
+- `splitWords(container, openingtag, closingtag)`: Splits words.
+- `splitLines(container, openingtag, closingtag)`: Splits lines while preserving HTML tags.
 
-// HTML ELEMENT, STRING, STRING
-splitLines(container, openingtag, closingtag);
+React usage example:
 
-// React usage
+```javascript
 useEffect(() => {
-  // It is not specific made for React but it works fine
-  splitLines(ref.current, openingtag, closingtag);
+  const lines = splitLines(ref.current, openingtag, closingtag);
 
-  // If not calulating correctly this might be an issue with the fonts which are not ready yet 
+  // If not calculating correctly, this might be an issue with fonts that are not ready yet
   document.fonts.ready.then(() => {
     splitLines(ref.current, openingtag, closingtag);
   });
 
-  // When running React in strict mode you might want to add an if statement to check if the function already fired
-  if (!ref.current.querySelector('.lines')) {
-    splitLines(ref.current, '<span class="lines">', '</span>');
-  }
-}, [])
+  return () => {
+    // Destroy lines (return to its initial state)
+    lines.destroy();
+  };
+}, []);
 ```
 
-#### Example
+## Example
 
-```js
+```javascript
 splitLines(document.getElementById("container"), "<span><thisiscoolhuh>", "</thisiscoolhuh></span>");
 ```
-#### Output
+
+## Output
 
 ![example.gif](https://media.giphy.com/media/jxchZz0EDhQ7QmYEwD/giphy.gif)
 
-#### MIT © <a href="nielsreijnders.nl">Niels Reijnders</a>
+## License
+
+MIT © [Niels Reijnders](https://www.bemeant.com)
+
+---
+
+*If you're looking for a lightweight library to split text into characters, words, or lines while preserving HTML tags, TextSplitter is the right choice! Easily integrate it into your projects using npm or yarn.*
