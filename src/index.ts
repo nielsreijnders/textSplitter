@@ -52,7 +52,6 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
 
   allElements.forEach((node, index) => {
     if (node.innerHTML.length === 1 && !node.innerHTML.match(/\w+|[.,?/#!$%^&*;:{}=\-_`~()]/g)) {
-      console.log(node.innerHTML)
       const firstWord = allElements[(index || 1) - 1]
       const secondWord = allElements[index + 1] ?? allElements[index]
       const { y: firstY } = firstWord.getBoundingClientRect()
@@ -110,8 +109,6 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
 
     // Remove closing tag from the end of the line
     const string = str.replace('</line>', '')
-
-    // console.log(string)
 
     // Get opening tags from the current line
     // ALSO SKIP ALL BR TAGS
