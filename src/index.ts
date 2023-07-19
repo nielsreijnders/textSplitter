@@ -51,7 +51,8 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
   const allElements = container.querySelectorAll('n')
 
   allElements.forEach((node, index) => {
-    if (node.innerHTML.length === 1 && !node.innerHTML.match(/[.,?/#!$%^&*;:{}=\-_`~()]/g)) {
+    if (node.innerHTML.length === 1 && !node.innerHTML.match(/\w+|[.,?/#!$%^&*;:{}=\-_`~()]/g)) {
+      console.log(node.innerHTML)
       const firstWord = allElements[(index || 1) - 1]
       const secondWord = allElements[index + 1] ?? allElements[index]
       const { y: firstY } = firstWord.getBoundingClientRect()
@@ -129,7 +130,7 @@ export function splitLines (container: HTMLElement, opentag: string, closingtag:
     closingtags.push(...closingTagsLastLine)
 
     // Filter opening tags that are not closed
-    const filteredOpeningTagsEndOfLine = openingtags.slice().splice(0, openingtags.length - closingtags.length).reverse()
+    const filteredOpeningTagsEndOfLine = openingtags.slice().splice(0, openingtags.length - closingtags.length)
     nextLineOpeningTags.push(filteredOpeningTagsEndOfLine)
 
     const refactoredLine = `${opentag}${openingTagsLastLine.join('')}${string}${filteredOpeningTagsEndOfLine.slice().reverse().map(tag => tag.replace('<', '</')).join('')}${closingtag}`
