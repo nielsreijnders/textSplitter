@@ -4,7 +4,7 @@
   setTimeout(() => {
     var startTime = performance.now()
 
-    const splitLines = window.textsplitter.splitLines(document.querySelector('.text'), '<span>', '</span>');
+    const splitLines = window.textsplitter.splitLines(document.querySelector('.text'), '<span class="line"">', '</span>');
     
     console.log(splitLines)
     
@@ -15,7 +15,13 @@
   })
 </script>
 
+<style>
+  .line:nth-child(even) {
+    background: red;
+  }
+</style>
+
 <body>
   <p class="text" style="font-size: 100px">
-<i>&shy;Lorem ipsum dolor, sit amet <b>consectetur &nang; adipisicingelit. Error optio repellat culpa quisquam&shy;cesfesfupiditate reiciendis numquam, sunt &nsimeq; reprehenderit animi quia veritatis voluptatum at placeat inventore? Porro, iure dolore. Illum provident consectetur, aut, eaque officiis iste, iure praesentium quas dolorum doloribus excepturi. In perspiciatis atque explicabo optio dolor. Numquam aliquam eum magnam ipsum sapiente debitis consequatur, reprehenderit iste at id delectus magni impedit itaque illum aperiam nisi ducimus illo doloribus quisquam temporibus commodi aut neque deserunt eius. Eos enim sunt modi. Sit distinctio, temporibus eum minus incidunt vero dolorem, repellendus molestias illum voluptates quo ullam ab reiciendis optio </b>in earum! Ducimus! </i> </p>
+<i>&shy;Lorem ipsum &&&&& ifj jsfjieosf jfsiejfi jfoijesiesjf oijsifji sjifjosijef >>>> joisj ifjsoijfoiesjf >> > > or, sit amet <b>consectetur &nang; adipisicingelit. Error optio repellat culpa sefesfesfeesfffseesffquisquam&shy;cesfesfupiditate reiciendis numquam, sunt &nsimeq; reprehenderit animi quia veritatis voluptatum at placeat inventore? Porro, iure dolore. Illum provident consectetur, aut, eaque officiis iste, iure praesentium quas dolorum doloribus excepturi. In perspiciatis atque explicabo optio dolor. Numquam aliquam eum magnam ipsum sapiente debitis consequatur, reprehenderit iste at id delectus magni impedit itaque illum aperiam nisi ducimus illo doloribus quisquam temporibus commodi aut neque deserunt eius. Eos enim sunt modi. Sit distinctio, temporibus eum minus incidunt vero dolorem, repellendus molestias illum voluptates quo ullam ab reiciendis optio </b>in earum! Ducimus! </i> </p>
 </body>

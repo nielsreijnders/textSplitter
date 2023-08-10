@@ -13,34 +13,27 @@ const resetContainer = (container: HTMLElement): (() => void) => {
   return reset
 }
 
-export function splitLetters (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
+export function splitLetters (container: HTMLElement, opentag: string, closingtag: string): { container: HTMLElement, destroy: () => any } {
   const destroy = resetContainer(container)
+  const htmlMatches = container.innerHTML.match(/<[^>]+>/g) || []
+  const textParts = container.innerHTML.split(/<[^>]+>/g)
 
-  const html: string[] = [...container.innerHTML.match(/<[^>]+>/g)! || '', '']
-  let tmp = ''
+  container.innerHTML = textParts.map((string, index) =>
+    string.replace(/(&[a-zA-Z]+;)|(\S)/g, opentag + '$&' + closingtag) + (htmlMatches[index] || '')
+  ).join('')
 
-  container.innerHTML.split(/<[^>]+>/g)?.forEach((string, index) => {
-    tmp += (string.replace(/\S/g, opentag + '$&' + closingtag) + html[index])
-  })
-
-  container.innerHTML = tmp
-
-  return ({ container, destroy })
+  return { container, destroy }
 }
 
-function splitWordsHelper (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
+function splitWordsHelper (container: HTMLElement, opentag: string, closingtag: string): { container: HTMLElement, destroy: () => any } {
   const destroy = resetContainer(container)
+  const html: string[] = [...container.innerHTML.match(/<[^>]+>/g) || '', '']
 
-  const html: string[] = [...container.innerHTML?.match(/<[^>]+>/g)! || '', '']
-  let tmp = ''
+  container.innerHTML = container.innerHTML.split(/<[^>]+>/g).map((string, index) => {
+    return string.replace(/((&[a-zA-Z]+;)|(\w+|-)|(\S))/g, opentag + '$1' + closingtag) + html[index]
+  }).join('')
 
-  container.innerHTML.split(/<[^>]+>/g)?.forEach((string, index) => {
-    tmp += string.replace(/((\w+|-)|(\S))/g, opentag + '$1' + closingtag) + html[index]
-  })
-
-  container.innerHTML = tmp
-
-  return ({ container, destroy })
+  return { container, destroy }
 }
 
 export function splitWords (container: HTMLElement, opentag: string, closingtag: string): ({ container: HTMLElement, destroy: () => any }) {
@@ -68,6 +61,8 @@ export function splitWords (container: HTMLElement, opentag: string, closingtag:
       }
     }
   })
+
+  // console.log(container.innerHTML)
 
   container.innerHTML = container.innerHTML.replace(/<n>/g, opentag).replace(/<\/n>/g, closingtag)
 
